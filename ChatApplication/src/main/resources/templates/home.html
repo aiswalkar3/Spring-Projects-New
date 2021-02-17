@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+</head>
+<body>
+<div class="form-group">
+    <label><a th:href="@{/logout}">Logout</a></label>
+</div>
+<form action="#" th:object="${messageForm}" method="POST" th:action="@{'/home'}">
+    <label for="newMessageText">Submit a new message: </label>
+    <input type="text" id="newMessageText" name="newMessageText" th:field="*{messageText}">
+    <label for="messageType">Message Type: </label>
+    <select id="messageType" th:field="*{messageType}">
+        <option
+                th:each="type : ${allMessageTypes}"
+                th:value="${type}"
+                th:text="${type}"
+        >
+            Say
+        </option>
+    </select>
+    <input type="submit" id = "submitMessage">
+</form>
+<div th:each = "msg:${greetings}">
+    <span class = "chatMessageUsername" th:text = "${msg.getUsername()}">Username</span>:
+    <span class = "chatMessageText" th:text = "${msg.getMessageText()}">Hello World!</span>
+</div>
+</body>
+</html>
